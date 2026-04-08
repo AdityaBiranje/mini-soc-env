@@ -1,0 +1,47 @@
+name: mini-soc-env
+description: A cybersecurity log analysis environment where agents classify logs and provide confidence scores for decisions.
+version: 1.0
+
+environment:
+  api:
+    base_url: http://localhost:8000
+
+tasks:
+  - name: easy
+    description: Simple log classification with obvious patterns
+    max_steps: 2
+
+  - name: medium
+    description: Moderately ambiguous logs requiring contextual reasoning
+    max_steps: 2
+
+  - name: hard
+    description: Complex logs with subtle security indicators requiring deeper analysis
+    max_steps: 2
+
+actions:
+  type: object
+  fields:
+    decision:
+      type: string
+      enum: [ignore, flag, escalate]
+    confidence:
+      type: float
+      range: [0.0, 1.0]
+
+observations:
+  type: object
+  fields:
+    log:
+      type: string
+    context:
+      type: string
+
+rewards:
+  range: [-1.0, 1.0]
+  description: Reward scales with confidence. Correct actions yield high positive reward, partially correct yield moderate reward, and incorrect actions incur penalties proportional to confidence.
+
+metadata:
+  author: Aditya Biranje
+  domain: cybersecurity
+  difficulty_levels: [easy, medium, hard]

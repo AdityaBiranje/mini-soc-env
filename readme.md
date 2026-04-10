@@ -184,9 +184,11 @@ The project includes `inference.py` which:
 The inference script uses:
 
 ```env
-HF_TOKEN=your_token
+API_KEY=your_token
 API_BASE_URL=https://router.huggingface.co/v1
 MODEL_NAME=Qwen/Qwen2.5-72B-Instruct
+
+Note: API_KEY refers to the Hugging Face token used with the OpenAI-compatible client.
 ```
 
 * Uses OpenAI-compatible client
